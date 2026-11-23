@@ -1,0 +1,164 @@
+{
+  "generated_at": "2026-11-23T05:18:59.660485Z",
+  "analyzed_file": "sample_access.log",
+  "total_parsed_requests": 13,
+  "verdict_breakdown": {
+    "BENIGN": 4,
+    "MALICIOUS": 8,
+    "SUSPICIOUS": 1
+  },
+  "flagged_source_ips": [
+    {
+      "source_ip": "10.10.14.88",
+      "total_requests": 6,
+      "http_404_count": 5,
+      "detected_techniques": [
+        "Automated Scanner User-Agent",
+        "Path Traversal / LFI",
+        "Web Shell / Sensitive File Probe"
+      ]
+    },
+    {
+      "source_ip": "172.16.5.42",
+      "total_requests": 2,
+      "http_404_count": 0,
+      "detected_techniques": [
+        "Cross-Site Scripting (XSS)",
+        "SSRF / Internal Metadata Probe"
+      ]
+    },
+    {
+      "source_ip": "203.0.113.77",
+      "total_requests": 1,
+      "http_404_count": 0,
+      "detected_techniques": [
+        "Automated Scanner User-Agent"
+      ]
+    }
+  ],
+  "alerts": [
+    {
+      "line": 4,
+      "timestamp": "23/Nov/2026:08:12:05 +0200",
+      "source_ip": "10.10.14.88",
+      "method": "GET",
+      "uri": "/admin",
+      "status_code": 404,
+      "user_agent": "gobuster/3.6",
+      "indicators": [
+        "Automated Scanner User-Agent",
+        "Directory/File Enumeration Burst (404 Spike)"
+      ],
+      "verdict": "MALICIOUS"
+    },
+    {
+      "line": 5,
+      "timestamp": "23/Nov/2026:08:12:06 +0200",
+      "source_ip": "10.10.14.88",
+      "method": "GET",
+      "uri": "/backup",
+      "status_code": 404,
+      "user_agent": "gobuster/3.6",
+      "indicators": [
+        "Automated Scanner User-Agent",
+        "Directory/File Enumeration Burst (404 Spike)"
+      ],
+      "verdict": "MALICIOUS"
+    },
+    {
+      "line": 6,
+      "timestamp": "23/Nov/2026:08:12:07 +0200",
+      "source_ip": "10.10.14.88",
+      "method": "GET",
+      "uri": "/config",
+      "status_code": 404,
+      "user_agent": "gobuster/3.6",
+      "indicators": [
+        "Automated Scanner User-Agent",
+        "Directory/File Enumeration Burst (404 Spike)"
+      ],
+      "verdict": "MALICIOUS"
+    },
+    {
+      "line": 7,
+      "timestamp": "23/Nov/2026:08:12:08 +0200",
+      "source_ip": "10.10.14.88",
+      "method": "GET",
+      "uri": "/server-status",
+      "status_code": 404,
+      "user_agent": "gobuster/3.6",
+      "indicators": [
+        "Automated Scanner User-Agent",
+        "Directory/File Enumeration Burst (404 Spike)"
+      ],
+      "verdict": "MALICIOUS"
+    },
+    {
+      "line": 8,
+      "timestamp": "23/Nov/2026:08:12:09 +0200",
+      "source_ip": "10.10.14.88",
+      "method": "GET",
+      "uri": "/.env",
+      "status_code": 404,
+      "user_agent": "gobuster/3.6",
+      "indicators": [
+        "Web Shell / Sensitive File Probe",
+        "Automated Scanner User-Agent",
+        "Directory/File Enumeration Burst (404 Spike)"
+      ],
+      "verdict": "MALICIOUS"
+    },
+    {
+      "line": 9,
+      "timestamp": "23/Nov/2026:08:12:15 +0200",
+      "source_ip": "10.10.14.88",
+      "method": "GET",
+      "uri": "/image?filename=../../../../etc/passwd",
+      "status_code": 200,
+      "user_agent": "Mozilla/5.0",
+      "indicators": [
+        "Path Traversal / LFI"
+      ],
+      "verdict": "MALICIOUS"
+    },
+    {
+      "line": 10,
+      "timestamp": "23/Nov/2026:08:14:22 +0200",
+      "source_ip": "172.16.5.42",
+      "method": "GET",
+      "uri": "/search?q=<script>alert(document.cookie)</script>",
+      "status_code": 403,
+      "user_agent": "Mozilla/5.0",
+      "indicators": [
+        "Cross-Site Scripting (XSS)"
+      ],
+      "verdict": "SUSPICIOUS"
+    },
+    {
+      "line": 11,
+      "timestamp": "23/Nov/2026:08:14:40 +0200",
+      "source_ip": "172.16.5.42",
+      "method": "GET",
+      "uri": "/api/stock?stockApi=http://169.254.169.254/latest/meta-data/",
+      "status_code": 200,
+      "user_agent": "Mozilla/5.0",
+      "indicators": [
+        "SSRF / Internal Metadata Probe"
+      ],
+      "verdict": "MALICIOUS"
+    },
+    {
+      "line": 12,
+      "timestamp": "23/Nov/2026:08:16:01 +0200",
+      "source_ip": "203.0.113.77",
+      "method": "GET",
+      "uri": "/login?user=admin'%20OR%201=1--",
+      "status_code": 500,
+      "user_agent": "sqlmap/1.7.8",
+      "indicators": [
+        "Automated Scanner User-Agent"
+      ],
+      "verdict": "MALICIOUS"
+    }
+  ]
+}
